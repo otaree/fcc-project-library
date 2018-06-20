@@ -4,6 +4,7 @@ require('dotenv').config();
 var express     = require('express');
 var bodyParser  = require('body-parser');
 var cors        = require('cors');
+const helmet = require("helmet");
 
 var apiRoutes         = require('./routes/api.js');
 var fccTestingRoutes  = require('./routes/fcctesting.js');
@@ -11,6 +12,9 @@ var runner            = require('./test-runner');
 const { mongoose } = require("./db/mongoose");
 
 var app = express();
+
+app.use(helmet());
+app.use(helmet.noCache());
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
